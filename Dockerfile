@@ -17,6 +17,6 @@ RUN chown -R ftp:ftp /home/vsftpd/
 VOLUME /home/guest
 VOLUME /var/log/vsftpd
 
-EXPOSE 20 21 21100-21110
+EXPOSE 20 21 48600-48697
 
 ENTRYPOINT ["/start.sh"]
