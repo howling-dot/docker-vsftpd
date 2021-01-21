@@ -1,44 +1,5 @@
 #!/bin/sh
 
-#Remove all ftp users
-#grep '/ftp/' /etc/passwd | cut -d':' -f1 | xargs -n1 deluser
-
-#Create users
-#USERS='name1|password1|[folder1][|uid1] name2|password2|[folder2][|uid2]'
-#may be:
-# user|password foo|bar|/home/foo
-#OR
-# user|password|/home/user/dir|10000
-#OR
-# user|password||10000
-
-#Default user 'ftp' with password 'alpineftp'
-
-if [ -z "$USERS" ]; then
-  USERS="ftp|alpineftp"
-fi
-
-for i in $USERS ; do
-    NAME=$(echo $i | cut -d'|' -f1)
-    PASS=$(echo $i | cut -d'|' -f2)
-  FOLDER=$(echo $i | cut -d'|' -f3)
-     UID=$(echo $i | cut -d'|' -f4)
-
-  if [ -z "$FOLDER" ]; then
-    FOLDER="/ftp/$NAME"
-  fi
-
-  if [ ! -z "$UID" ]; then
-    UID_OPT="-u $UID"
-  fi
-
-  echo -e "$PASS\n$PASS" | adduser -h $FOLDER -s /sbin/nologin $UID_OPT $NAME
-  mkdir -p $FOLDER
-  chown $NAME:$NAME $FOLDER
-  unset NAME PASS FOLDER UID
-done
-
-
 CONF_FILE="/etc/vsftp/vsftp.conf"
 
 if [ "$1" = "ftp" ]; then
