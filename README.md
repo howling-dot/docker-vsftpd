@@ -1,4 +1,4 @@
-# loicmathieu/vsftpd
+# fork loicmathieu/vsftpd
 This is a docker container to launch vsftpd.
 It comes with 4 pre-defined configuration :
 - ftp : FTP
