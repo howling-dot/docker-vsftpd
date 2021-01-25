@@ -54,7 +54,7 @@ for i in $USERS ; do
   fi
 
 
-  echo -e "$PASS\n$PASS" | adduser -d $FOLDER -r /sbin/nologin $NAME
+  echo -e "$PASS\n$PASS" | adduser -d $FOLDER -r $NAME
   mkdir -p $FOLDER
   chown $NAME:$NAME $FOLDER
   unset NAME PASS FOLDER
